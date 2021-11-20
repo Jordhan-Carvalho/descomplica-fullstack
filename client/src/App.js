@@ -1,18 +1,28 @@
 import { createGlobalStyle } from "styled-components";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
+import StudentUploadPage from "./pages/StudentUploadPage/StudentUploadPage";
 import LandingPage from "./pages/LandingPage";
 import Header from "./components/Header";
 
+const client = new ApolloClient({
+  uri: '/api/graphql',
+  cache: new InMemoryCache()
+});
+
 function App() {
   return (
-    <Router>
-      <GlobalStyle />
-      <Header />
-      <Switch>
-        <Route path="/" exact component={LandingPage} />
-      </Switch>
-    </Router>
+    <ApolloProvider client={client}>
+      <Router>
+        <GlobalStyle />
+        <Header />
+        <Switch>
+          <Route path="/student-upload" component={StudentUploadPage} />
+          <Route path="/" exact component={LandingPage} />
+        </Switch>
+      </Router>
+    </ApolloProvider>
   );
 }
 
