@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import { createGlobalStyle } from "styled-components";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+import LandingPage from "./pages/LandingPage";
+import Header from "./components/Header";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <GlobalStyle />
+      <Header />
+      <Switch>
+        <Route path="/" exact component={LandingPage} />
+      </Switch>
+    </Router>
   );
 }
 
 export default App;
+
+const GlobalStyle = createGlobalStyle`
+:root {
+  --gradient: linear-gradient(to right, #f7f8f8, #acbb78);
+  --generalFont: 'Baloo 2', cursive;
+  --titleFont: 'Press Start 2P', cursive;
+}
+
+body {
+  font-family: var(--generalFont);
+  color: white;
+}
+
+#root {
+  min-height: 100vh;
+  width: 100%;
+  background: var(--gradient);
+}
+
+`;
