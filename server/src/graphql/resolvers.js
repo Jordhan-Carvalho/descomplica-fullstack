@@ -1,5 +1,7 @@
+import { prisma } from '../prisma.js';
+
 const Query = {
-  greeting: () => 'Hello world!',
+  students: (root, args) => prisma.student.findMany(),
 }
 
 
