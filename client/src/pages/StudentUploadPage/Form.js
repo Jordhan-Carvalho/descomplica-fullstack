@@ -1,33 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-import { gql, useMutation, useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 
+import { CREATE_STUDENT } from "../../utils/queries";
 import Button from "../../components/Button";
 import Spinner from "../../components/Spinner";
 import { cpfMask } from "../../utils/masks";
 
-const GET_STUDENTS = gql`
-  query GetStudents{
-    students {
-      id
-      name
-      CPF
-      email
-    }
-  }
-`;
-
-const CREATE_STUDENT = gql`
-  mutation CreateStudent($input: CreateStudentInput) {
-    student: createStudent(input: $input) {
-      email
-      name
-      id
-      CPF
-    }
-  }
-`;
 
 export default function Form() {
   const [createStudent, { data, loading, error }] = useMutation(CREATE_STUDENT);

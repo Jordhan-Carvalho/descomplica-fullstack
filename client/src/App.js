@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
 import StudentUploadPage from "./pages/StudentUploadPage/StudentUploadPage";
+import StudentsPage from "./pages/StudentsPage/StudentsPage";
 import LandingPage from "./pages/LandingPage";
 import Header from "./components/Header";
 
@@ -18,6 +19,7 @@ function App() {
         <GlobalStyle />
         <Header />
         <Switch>
+          <Route path="/students" component={StudentsPage} />
           <Route path="/student-upload" component={StudentUploadPage} />
           <Route path="/" exact component={LandingPage} />
         </Switch>

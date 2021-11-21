@@ -32,7 +32,7 @@ const studentData = [
   },
   {
     name: 'Henry',
-    email: 'Henry@descomplica.com.br',
+    email: 'henry@descomplica.com.br',
     CPF: '86636585236',
   },
   {
@@ -41,8 +41,13 @@ const studentData = [
     CPF: '57836585236',
   },
   {
-    name: 'Star Citezen',
-    email: 'starcitezen@descomplica.com.br',
+    name: 'Hfn k3',
+    email: 'hfn@descomplica.com.br',
+    CPF: '57836585236',
+  },
+  {
+    name: 'Star Citizen',
+    email: 'starcitizen@descomplica.com.br',
     CPF: '13936534236',
   },
   {

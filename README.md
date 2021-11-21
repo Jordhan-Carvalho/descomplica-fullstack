@@ -14,3 +14,6 @@ DATABASE_URL="postgresql://postgres:postgres_password@postgres:5432/postgres?sch
 DATABASE_URL="postgresql://postgres:postgres_password@localhost:9000/postgres?schema=public"
 
 Theres a bash script to reset and seed the databse everytime the docker-compose is ran... This is to reflect a fresh state in the application
+
+
+The query is using the default cache, which is, always cache untill page open the page again or refresh

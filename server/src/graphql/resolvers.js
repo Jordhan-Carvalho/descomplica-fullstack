@@ -6,7 +6,6 @@ const Query = {
 
 const Mutation = {
   createStudent: async (root, { input }) => {
-    console.log(input);
     const student = await prisma.student.create({
       data: {
         name: input.name,
@@ -14,7 +13,7 @@ const Mutation = {
         CPF: input.CPF,
       },
     })
-    console.log("STUDENT", student)
+
     return student
   }
 }
