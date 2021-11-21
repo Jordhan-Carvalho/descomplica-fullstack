@@ -2,6 +2,7 @@ import { gql } from "apollo-server-core"
 
 export const typeDefs = gql`
   type Query {
+    student: Student
     students: [Student]
   }
 

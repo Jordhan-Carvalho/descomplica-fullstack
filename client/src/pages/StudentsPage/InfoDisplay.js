@@ -15,7 +15,7 @@ export default function InfoDisplay({ data }) {
         data.map((student) => (
           <ItemContainer
             key={student.id}
-            onClick={() => console.log("JO")}
+            onClick={() => alert("Open edit/delete modal")}
           >
             <p>{student.name}</p>
             <p>{student.CPF}</p>

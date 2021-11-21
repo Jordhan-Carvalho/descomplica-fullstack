@@ -1,6 +1,11 @@
 import { prisma } from '../prisma.js';
 
 const Query = {
+  student: (root, args) => prisma.student.findUnique({
+    where: {
+      id: 99,
+    },
+  }),
   students: (root, args) => prisma.student.findMany(),
 }
 

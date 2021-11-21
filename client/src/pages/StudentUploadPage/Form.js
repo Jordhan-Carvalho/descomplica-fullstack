@@ -1,48 +1,56 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { useMutation } from '@apollo/client';
 
-import { CREATE_STUDENT } from "../../utils/queries";
+import { CREATE_STUDENT, GET_STUDENTS } from "../../utils/queries";
 import Button from "../../components/Button";
 import Spinner from "../../components/Spinner";
 import { cpfMask } from "../../utils/masks";
 
 
 export default function Form() {
-  const [createStudent, { data, loading, error }] = useMutation(CREATE_STUDENT);
-
-
   const [cpf, setCpf] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const history = useHistory();
 
-  useEffect(() => {
-    console.log(data);
-  }, []);
+  const history = useHistory();
+  // Using update to update the cache when the mutation is done
+  const [createStudent, { data, loading, error }] = useMutation(CREATE_STUDENT, {
+    onCompleted: () => {
+      history.push("/students");
+    },
+    update(cache, { data })  {
+      const queryData = cache.readQuery({ query: GET_STUDENTS, variables: { name: true, CPF: true, email: true } });
+      // If you access the create page before the first query it will return null
+      if (queryData) {
+        cache.writeQuery({
+          query: GET_STUDENTS,
+          variables: { name: true, CPF: true, email: true },
+          data: { students: [...queryData.students, data.student] },
+        });
+      }
+    }
+  });
+
+
 
   const submitStudent = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
     try {
       const studentInfo = {
         CPF: cpf,
         name,
         email,
       };
-      createStudent({ variables: { input: studentInfo } });
+      await createStudent({ variables: { input: studentInfo } });
 
-      setIsLoading(false);
-      history.push("/students");
     } catch (e) {
       console.error(e);
-      setIsLoading(false);
     }
   };
 
-  if (isLoading || loading) return <Spinner />;
+  if (loading) return <Spinner />;
   if (error) return `Submission error! ${error.message}`;
 
   return (
@@ -82,7 +90,7 @@ export default function Form() {
         />
       </div>
       <BtnContainer>
-        <Button disable={isLoading} form="add-form" type="submit">
+        <Button disable={loading} form="add-form" type="submit">
           Adicionar
         </Button>
       </BtnContainer>

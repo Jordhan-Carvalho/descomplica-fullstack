@@ -12,6 +12,18 @@ export const GET_STUDENTS = gql`
   }
 `;
 
+export const GET_STUDENT = gql`
+  query GetStudent($id: ID!){
+    student {
+      id
+      name 
+      CPF 
+      email 
+    }
+  }
+`;
+
+
 export const CREATE_STUDENT = gql`
   mutation CreateStudent($input: CreateStudentInput) {
     student: createStudent(input: $input) {
