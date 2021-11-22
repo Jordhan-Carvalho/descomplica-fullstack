@@ -10,11 +10,11 @@ export const typeDefs = gql`
     createStudent(input: CreateStudentInput): Student
   }
 
-  type Student {
+  type Student @cacheControl(maxAge: 240) {
     id: ID!
-    name: String
+    name: String @cacheControl(maxAge: 86400)
     email: String
-    CPF: String
+    CPF: String @cacheControl(maxAge: 86400)
   }
 
   input CreateStudentInput {
@@ -22,4 +22,15 @@ export const typeDefs = gql`
     email: String
     CPF: String
   }
+
+  enum CacheControlScope {
+    PUBLIC
+    PRIVATE
+  }
+
+  directive @cacheControl(
+    maxAge: Int
+    scope: CacheControlScope
+    inheritMaxAge: Boolean
+  ) on FIELD_DEFINITION | OBJECT | INTERFACE | UNION
 `

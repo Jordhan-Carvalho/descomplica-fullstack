@@ -31,21 +31,20 @@ function App() {
 export default App;
 
 const GlobalStyle = createGlobalStyle`
-:root {
-  --gradient: linear-gradient(to right, #f7f8f8, #acbb78);
-  --generalFont: 'Baloo 2', cursive;
-  --titleFont: 'Press Start 2P', cursive;
-}
+  :root {
+    --gradient: linear-gradient(to right, #f7f8f8, #acbb78);
+    --generalFont: 'Baloo 2', cursive;
+    --titleFont: 'Press Start 2P', cursive;
+  }
 
-body {
-  font-family: var(--generalFont);
-  color: white;
-}
+  body {
+    font-family: var(--generalFont);
+    color: white;
+  }
 
-#root {
-  min-height: 100vh;
-  width: 100%;
-  background: var(--gradient);
-}
-
+  #root {
+    min-height: 100vh;
+    width: 100%;
+    background: var(--gradient);
+  }
 `;
